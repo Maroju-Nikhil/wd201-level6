@@ -8,7 +8,7 @@ let server, agent;
 describe("Todo Application", function () {
   beforeAll(async () => {
     await db.sequelize.sync({ force: true });
-    server = app.listen(3000, () => { });
+    server = app.listen(3000, () => {});
     agent = request.agent(server);
   });
 
@@ -60,7 +60,7 @@ describe("Todo Application", function () {
       completed: false,
     });
     await agent.post("/todos").send({
-      title: "Buy ps5",
+      title: "Buy ps3",
       dueDate: new Date().toISOString(),
       completed: false,
     });
@@ -72,8 +72,9 @@ describe("Todo Application", function () {
   });
 
   test("Deletes a todo with the given ID if it exists and sends a boolean response", async () => {
+    // FILL IN YOUR CODE HERE
     const response = await agent.post("/todos").send({
-      title: "Buy notebook",
+      title: "Buy notes",
       dueDate: new Date().toISOString(),
       completed: false,
     });
