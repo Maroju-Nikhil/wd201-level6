@@ -1,8 +1,9 @@
+//Done by Nikhil Maroju
+
 const request = require("supertest");
 var cheerio = require("cheerio");
 const db = require("../models/index");
 const app = require("../app");
-//const todo = require("../models/todo");
 let server, agent;
 
 //function to extract csrf token
@@ -14,13 +15,14 @@ function extractCsrfToken(response) {
 describe("Testing Todo ", () => {
   beforeAll(async () => {
     await db.sequelize.sync({ force: true });
-    server = app.listen(4000, () => {});
+    server = app.listen(4000, () => { });
     agent = request.agent(server);
   });
   afterAll(async () => {
     await db.sequelize.close();
     server.close();
   });
+
   //Test
   test("To Create new todo...", async () => {
     const res = await agent.get("/");
@@ -31,10 +33,10 @@ describe("Testing Todo ", () => {
       completed: false,
       _csrf: csrfToken,
     });
-    expect(response.statusCode).toBe(422); //http status code
+    expect(response.statusCode).toBe(422);
   });
 
-  // Test for false to true
+  // Test
 
   test("To update the completed field of a given todo list : ", async () => {
     const res = await agent.get("/");
@@ -66,8 +68,8 @@ describe("Testing Todo ", () => {
     const parsedUpdateResponse2 = JSON.parse(setCompletionResponse2.text);
     expect(parsedUpdateResponse2.completed).toBe(false);
   });
-  
- //Test
+
+  //Test
 
   test("Marking a todo as complete", async () => {
     let res = await agent.get("/");
@@ -132,7 +134,7 @@ describe("Testing Todo ", () => {
     expect(parsedUpdateResponses.completed).toBe(false);
   });
 
- 
+
   //Test
   test("Delete todo using ID", async () => {
     let res = await agent.get("/");
@@ -162,5 +164,5 @@ describe("Testing Todo ", () => {
   });
 
 
-  
+
 });
