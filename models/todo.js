@@ -1,3 +1,4 @@
+//Done by Nikhil Maroju
 "use strict";
 const { Model, Op } = require("sequelize");
 
@@ -9,14 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+
     }
     static addaTodo({ title, dueDate }) {
       return this.create({ title: title, dueDate: dueDate, completed: false });
     }
-    // static markAsCompleted() {
-    //   return this.update({ completed: true });
-    // }
+
     static getAllTodos() {
       return this.findAll({ order: [["id", "ASC"]] });
     }
